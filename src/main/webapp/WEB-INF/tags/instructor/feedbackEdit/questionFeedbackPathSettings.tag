@@ -73,6 +73,50 @@
             </div>
         </div>
     </div>
+    <div class="row custom-feedback-paths-row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <a class="toggle-custom-feedback-paths-display-link"
+                       onclick="toggleCustomFeedbackPathsDisplay(this)">Show details and further customizations</a>
+                </div>   
+            </div>
+            <div class="row custom-feedback-paths-display margin-top-15px">
+                <div class="col-sm-3">
+                    <p class="text-muted"><strong>How to use:</strong></p>
+                    <p class="text-muted">The editable spreadsheet to the right shows the feedback paths.</p>
+                    <p class="text-muted">Each row represents the feedback paths of a single giver to multiple recipients.</p>
+                    <p class="text-muted">The first column contains the feedback giver and each of the subsequent columns contains a recipient.</p>
+                </div>
+                <div class="col-sm-9">
+                    <div class="row custom-feedback-paths-spreadsheet margin-bottom-15px">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="10">Placeholder spreadsheet</textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-inline pull-right">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Rows </label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" placeholder="Rows">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cols </label>
+                                    <div class="col-sm-4">
+                                        <input type="number" class="form-control" placeholder="Cols">
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="button">Add rows and cols</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>               
+            </div>
+        </div>
+    </div>
 </div>
 
 <br>
