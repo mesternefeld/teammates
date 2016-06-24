@@ -2,8 +2,13 @@ package teammates.ui.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.json.JSONObject;
 
 import teammates.common.datatransfer.AccountAttributes;
 import teammates.common.datatransfer.FeedbackParticipantType;
@@ -16,6 +21,8 @@ import teammates.common.datatransfer.StudentAttributes;
 import teammates.common.util.Assumption;
 import teammates.common.util.Config;
 import teammates.common.util.Const;
+import teammates.common.util.Sanitizer;
+import teammates.common.util.StringHelper;
 import teammates.ui.template.ElementTag;
 import teammates.ui.template.FeedbackQuestionEditForm;
 import teammates.ui.template.FeedbackQuestionFeedbackPathSettings;
@@ -32,6 +39,9 @@ public class InstructorFeedbackEditPageData extends PageData {
     private FeedbackSessionPreviewForm previewForm;
     private String statusForAjax;
     private boolean hasError;
+    private Map<String, String> studentsData;
+    private List<String> instructorsData;
+    private String creatorEmail;
     
     public InstructorFeedbackEditPageData(AccountAttributes account) {
         super(account);
@@ -42,6 +52,10 @@ public class InstructorFeedbackEditPageData extends PageData {
                      List<StudentAttributes> studentList, List<InstructorAttributes> instructorList,
                      InstructorAttributes instructor) {
         Assumption.assertNotNull(feedbackSession);
+        
+        setCreatorEmail(feedbackSession.getCreatorEmail());
+        
+        populateCourseData(studentList, instructorList);
         
         buildFsForm(feedbackSession);
         
@@ -205,6 +219,18 @@ public class InstructorFeedbackEditPageData extends PageData {
         return options;
     }
     
+    private void populateCourseData (
+            List<StudentAttributes> students, List<InstructorAttributes> instructors) {
+        studentsData = new TreeMap<String, String>();
+        for (StudentAttributes student : students) {
+            studentsData.put(student.getEmail(), student.getTeam());
+        }
+        instructorsData = new ArrayList<String>();
+        for (InstructorAttributes instructor : instructors) {
+            instructorsData.add(instructor.getEmail());
+        }
+    }
+    
     /**
      * Returns String of HTML containing a list of options for selecting question type.
      * Used in instructorFeedbackEdit.jsp for selecting the question type for a new question.
@@ -292,5 +318,22 @@ public class InstructorFeedbackEditPageData extends PageData {
 
     public void setHasError(boolean value) {
         this.hasError = value;
+    }
+    
+    public String getCreatorEmail() {
+        return creatorEmail;
+    }
+    
+    public void setCreatorEmail(String creatorEmail) {
+        this.creatorEmail = creatorEmail;
+    }
+    
+    public String getStudentsDataAsString() {
+        JSONObject json = new JSONObject(studentsData);
+        return Sanitizer.sanitizeForHtml(json.toString());
+    }
+    
+    public String getInstructorsDataAsString() {
+        return Sanitizer.sanitizeForHtml(Sanitizer.sanitizeListForCsv(instructorsData).toString());
     }
 }

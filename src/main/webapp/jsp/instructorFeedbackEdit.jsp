@@ -12,8 +12,11 @@
 <%@ taglib tagdir="/WEB-INF/tags/instructor/feedbacks" prefix="feedbacks" %>
 
 <c:set var="jsIncludes">
+    <link rel="stylesheet" href="/stylesheets/handsontable.full.min.css" type="text/css" media="screen">
     <link rel="stylesheet" href="/stylesheets/datepicker.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="/stylesheets/customFeedbackPaths.css" type="text/css" media="screen">
     
+    <script type="text/javascript" src="/js/handsontable.full.min.js"></script>
     <script type="text/javascript" src="/js/datepicker.js"></script>
     <script type="text/javascript" src="/js/instructor.js"></script>
     <script type="text/javascript" src="/js/instructorFeedbacks.js"></script>
@@ -28,13 +31,14 @@
     <script type="text/javascript" src="/js/instructorFeedbackEdit/questionContrib.js"></script>
     <script type="text/javascript" src="/js/instructorFeedbackEdit/questionRubric.js"></script>
     <script type="text/javascript" src="/js/instructorFeedbackEdit/questionRank.js"></script>
+    <script type="text/javascript" src="/js/instructorFeedbackEdit/customFeedbackPaths.js"></script>
 </c:set>
 
 <c:set var="EMPTY_FEEDBACK_SESSION_MESSAGE">
  <%= Const.StatusMessages.FEEDBACK_QUESTION_EMPTY %>
 </c:set>
 <ti:instructorPage pageTitle="TEAMMATES - Instructor" bodyTitle="Edit Feedback Session" jsIncludes="${jsIncludes}">
-    
+    <feedbackEdit:courseData sessionCreatorData="${data.creatorEmail}" studentsData="${data.studentsDataAsString}" instructorsData="${data.instructorsDataAsString}"/>
     <feedbacks:feedbackSessionsForm fsForm="${data.fsForm}" />
      
     <br>

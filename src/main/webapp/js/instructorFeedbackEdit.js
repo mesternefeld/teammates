@@ -839,7 +839,8 @@ function getQuestionIdSuffix(questionNum) {
 
 function toggleCustomFeedbackPathsDisplay(toggleLink) {
     var $toggleLink = $(toggleLink);
-    var $customFeedbackPathsDisplay = $toggleLink.closest('.custom-feedback-paths-row').find('.custom-feedback-paths-display');
+    var $customFeedbackPathsDisplay = $toggleLink.closest('.custom-feedback-paths-row')
+                                                 .find('.custom-feedback-paths-display');
     if ($customFeedbackPathsDisplay.is(':visible')) {
         $customFeedbackPathsDisplay.hide();
         $toggleLink.text('Show details and further customizations');

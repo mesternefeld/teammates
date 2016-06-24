@@ -21,7 +21,7 @@
                 id="<%= Const.ParamsNames.FEEDBACK_QUESTION_GIVERTYPE %>${fqForm.questionNumberSuffix}"
                 name="<%= Const.ParamsNames.FEEDBACK_QUESTION_GIVERTYPE %>"
                 <c:if test="${!fqForm.editable}">disabled</c:if>
-                onchange="feedbackGiverUpdateVisibilityOptions(this)">
+                onchange="feedbackGiverUpdateVisibilityOptions(this);generateFeedbackPathsSpreadsheet(${fqForm.questionIndex});">
                 <c:forEach items="${fqForm.feedbackPathSettings.giverParticipantOptions}" var="option">
                     <option ${option.attributesToString}>
                         ${option.content}
@@ -39,7 +39,7 @@
             <select class="form-control participantSelect"
                 id="<%= Const.ParamsNames.FEEDBACK_QUESTION_RECIPIENTTYPE %>${fqForm.questionNumberSuffix}"
                 name="<%= Const.ParamsNames.FEEDBACK_QUESTION_RECIPIENTTYPE %>"
-                <c:if test="${!fqForm.editable}">disabled</c:if> onchange="feedbackRecipientUpdateVisibilityOptions(this);getVisibilityMessageIfPreviewIsActive(this);">
+                <c:if test="${!fqForm.editable}">disabled</c:if> onchange="feedbackRecipientUpdateVisibilityOptions(this);getVisibilityMessageIfPreviewIsActive(this);generateFeedbackPathsSpreadsheet(${fqForm.questionIndex});">
                 <c:forEach items="${fqForm.feedbackPathSettings.recipientParticipantOptions}" var="option">
                     <option ${option.attributesToString}>
                         ${option.content}
@@ -89,9 +89,9 @@
                     <p class="text-muted">The first column contains the feedback giver and each of the subsequent columns contains a recipient.</p>
                 </div>
                 <div class="col-sm-9">
-                    <div class="row custom-feedback-paths-spreadsheet margin-bottom-15px">
+                    <div class="row margin-bottom-15px">
                         <div class="col-sm-12">
-                            <textarea class="form-control" rows="10">Placeholder spreadsheet</textarea>
+                            <div class="custom-feedback-paths-spreadsheet"></div>
                         </div>
                     </div>
                     <div class="row">
